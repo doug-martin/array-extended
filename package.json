@@ -23,6 +23,6 @@
     },
     "devDependencies": {
         "it": "~0.1.0",
-        "grunt-it": "~0.3.0"
+        "grunt-it": "~0.2.1"
     }
 }
