@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/doug-martin/array-extended.png)](http://travis-ci.org/doug-martin/array-extended)
+[![Build Status](https://travis-ci.org/doug-martin/array-extended.png?branch=master)](undefined)
 
 # array-extended
 
