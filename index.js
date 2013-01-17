@@ -1,6 +1,5 @@
 (function () {
     "use strict";
-    /*global extender isExtended*/
 
     var arraySlice = Array.prototype.slice;
 
@@ -9,7 +8,7 @@
         return arraySlice.call(args, slice);
     }
 
-    function defineArray(extender, is) {
+    function defineArray(extended, is) {
 
         var isString = is.isString,
             isArray = is.isArray,
@@ -634,19 +633,19 @@
             lastIndexOf: lastIndexOf
         };
 
-        return extender.define(isArray, array).expose(array);
+        return extended.define(isArray, array).expose(array);
     }
 
     if ("undefined" !== typeof exports) {
         if ("undefined" !== typeof module && module.exports) {
-            module.exports = defineArray(require("extender"), require("is-extended"));
+            module.exports = defineArray(require("extended"), require("is-extended"));
         }
     } else if ("function" === typeof define) {
         define(["require"], function (require) {
-            return defineArray(require("extender"), require("is-extended"));
+            return defineArray(require("extended"), require("is-extended"));
         });
     } else {
-        this.arrayExtended = defineArray(extender, isExtended);
+        this.arrayExtended = defineArray(this.extended, this.isExtended);
     }
 
 }).call(this);
