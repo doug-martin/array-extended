@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/doug-martin/array-extended.png?branch=master)](undefined)
 
+[![browser support](http://ci.testling.com/doug-martin/array-extended.png)](http://ci.testling.com/doug-martin/array-extended)
+
 # array-extended
 
 `array-extended` is a Javascript library that can be used standalone or incorporated into [`extended`](https://github.com/doug-martin/extended)
