@@ -184,7 +184,7 @@ it.describe("arrayExtender",function (it) {
             return prev;
         }, []).value(), [1, 2, 3, 4, 5]);
 
-        arr = [1, 2, 3, 4, 5]
+        arr = [1, 2, 3, 4, 5];
         assert.equal(array.reduce(arr, function (prev, curr) {
             return prev + curr;
         }), 15);
@@ -244,7 +244,7 @@ it.describe("arrayExtender",function (it) {
             ["c", "c"]
         ]);
         assert.deepEqual(array.toArray("a", {a: "b"}), ["a", ["a", "b"]]);
-        var date = new Date();
+        date = new Date();
         assert.deepEqual(array.toArray(date), [date]);
         assert.deepEqual(array.toArray(true), [true]);
         assert.deepEqual(array.toArray(false), [false]);
@@ -268,7 +268,9 @@ it.describe("arrayExtender",function (it) {
         assert.equal(array.sum([]), 0);
         assert.equal(array.sum([1, 2, 3]), 6);
         assert.equal(array.sum(["A", "B", "C"]), "ABC");
-        var d1 = new Date(1999), d2 = new Date(2000), d3 = new Date(3000);
+        d1 = new Date(1999);
+        d2 = new Date(2000);
+        d3 = new Date(3000);
         assert.equal(array.sum([d1, d2, d3]), d1.toString() + d2.toString() + d3.toString());
         assert.equal(array.sum([
             {},
@@ -720,31 +722,31 @@ it.describe("arrayExtender",function (it) {
         assert.deepEqual(arr6.min("a").value(), {a: minDate});
 
 
-        var arr1 = [ 3, -3, -2, -1, 1, 2],
-            arr2 = ["b", "c", "a"],
-            arr3 = [
-                {a: 1},
-                {a: 2},
-                {a: -2}
-            ],
-            arr4 = [
-                {a: "c"},
-                {a: "b"},
-                {a: "a"}
-            ],
-            minDate = new Date(2007),
-            arr5 = [
-                new Date(2010),
-                new Date(2009),
-                new Date(2008),
-                minDate
-            ],
-            arr6 = [
-                {a: new Date(2010)},
-                {a: new Date(2009)},
-                {a: minDate}
-            ],
-            arr7 = [true, false];
+        arr1 = [ 3, -3, -2, -1, 1, 2];
+        arr2 = ["b", "c", "a"];
+        arr3 = [
+            {a: 1},
+            {a: 2},
+            {a: -2}
+        ];
+        arr4 = [
+            {a: "c"},
+            {a: "b"},
+            {a: "a"}
+        ];
+        minDate = new Date(2007);
+        arr5 = [
+            new Date(2010),
+            new Date(2009),
+            new Date(2008),
+            minDate
+        ];
+        arr6 = [
+            {a: new Date(2010)},
+            {a: new Date(2009)},
+            {a: minDate}
+        ];
+        arr7 = [true, false];
         assert.equal(array.min(arr1), -3);
         assert.equal(array.min(arr2), "a");
         assert.isFalse(array.min(arr7));
@@ -771,12 +773,12 @@ it.describe("arrayExtender",function (it) {
             arr5 = array([
                 maxDate,
                 new Date(2009),
-                new Date(2008),
+                new Date(2008)
             ]),
             arr6 = array([
                 {a: maxDate},
                 {a: new Date(2009)},
-                {a: new Date(2008), }
+                {a: new Date(2008)}
             ]),
             arr7 = array([true, false]);
         assert.equal(arr1.max().value(), 3);
@@ -788,30 +790,30 @@ it.describe("arrayExtender",function (it) {
         assert.deepEqual(arr6.max("a").value(), {a: maxDate});
 
 
-        var arr1 = [ 3, -3, -2, -1, 1, 2],
-            arr2 = ["b", "c", "a"],
-            arr3 = [
-                {a: 1},
-                {a: 2},
-                {a: -2}
-            ],
-            arr4 = [
-                {a: "c"},
-                {a: "b"},
-                {a: "a"}
-            ],
-            maxDate = new Date(2010),
-            arr5 = [
-                maxDate,
-                new Date(2009),
-                new Date(2008),
-            ],
-            arr6 = [
-                {a: maxDate},
-                {a: new Date(2009)},
-                {a: new Date(2008), }
-            ],
-            arr7 = [true, false];
+        arr1 = [ 3, -3, -2, -1, 1, 2];
+        arr2 = ["b", "c", "a"];
+        arr3 = [
+            {a: 1},
+            {a: 2},
+            {a: -2}
+        ];
+        arr4 = [
+            {a: "c"},
+            {a: "b"},
+            {a: "a"}
+        ];
+        maxDate = new Date(2010);
+        arr5 = [
+            maxDate,
+            new Date(2009),
+            new Date(2008)
+        ];
+        arr6 = [
+            {a: maxDate},
+            {a: new Date(2009)},
+            {a: new Date(2008)}
+        ];
+        arr7 = [true, false];
         assert.equal(array.max(arr1), 3);
         assert.equal(array.max(arr2), "c");
         assert.isTrue(array.max(arr7));
@@ -1033,7 +1035,7 @@ it.describe("arrayExtender",function (it) {
             {name: {first: "Bob", last: "Yukon"}, age: 40, roles: ["b", "c"]},
             {name: {first: "Alice", last: "Palace"}, age: 35, roles: ["c"]},
             {name: {first: "Johnny", last: "P."}, age: 56, roles: []}
-        ]
+        ];
 
         assert.deepEqual(array.pluck(arr, "name.first"), ["Fred", "Bob", "Alice", "Johnny"]);
         assert.deepEqual(array(arr).pluck("name.first").value(), ["Fred", "Bob", "Alice", "Johnny"]);
@@ -1044,8 +1046,10 @@ it.describe("arrayExtender",function (it) {
         assert.deepEqual(array.pluck(arr, "roles.length"), [3, 2, 1, 0]);
         assert.deepEqual(array(arr).pluck("roles.length").value(), [3, 2, 1, 0]);
 
-        assert.deepEqual(array.pluck(arr, "roles.0"), ["a", "b", "c", undefined]);
-        assert.deepEqual(array(arr).pluck("roles.0").value(), ["a", "b", "c", undefined]);
+        var expected = ["a", "b", "c"];
+        expected.push(undefined);
+        assert.deepEqual(array.pluck(arr, "roles.0"), expected);
+        assert.deepEqual(array(arr).pluck("roles.0").value(), expected);
 
     });
 

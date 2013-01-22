@@ -1,6 +1,6 @@
 {
     "name": "array-extended",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Additional array extensions with a chainable api",
     "main": "index.js",
     "scripts": {
@@ -28,8 +28,8 @@
     "author": "Doug Martin",
     "license": "MIT",
     "dependencies": {
-        "extended": "0.0.2",
-        "is-extended": "0.0.2"
+        "extended": "~0.0.3",
+        "is-extended": "~0.0.3"
     },
     "devDependencies": {
         "it": "~0.2.0",
