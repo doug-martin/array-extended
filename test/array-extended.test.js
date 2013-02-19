@@ -171,10 +171,6 @@ it.describe("arrayExtender",function (it) {
             array.reduce();
         });
 
-        assert.throws(function () {
-            array.reduce([], function () {
-            });
-        });
 
         assert.equal(arr.reduce(function (prev, curr) {
             return prev + curr;
@@ -199,11 +195,6 @@ it.describe("arrayExtender",function (it) {
 
         assert.throws(function () {
             array.reduceRight();
-        });
-
-        assert.throws(function () {
-            array.reduceRight([], function () {
-            });
         });
 
         assert.equal(arr.reduceRight(function (prev, curr) {
@@ -1092,4 +1083,7 @@ it.describe("arrayExtender",function (it) {
             })
             .sum().value(), 25);
     });
-}).as(module).run();
+}).as(module);
+
+
+it.run();

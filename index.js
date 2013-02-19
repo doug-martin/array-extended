@@ -11,12 +11,21 @@
     function defineArray(extended, is) {
 
         var isString = is.isString,
-            isArray = is.isArray,
+            isArray = Array.isArray || is.isArray,
             isDate = is.isDate,
             floor = Math.floor,
             abs = Math.abs,
             mathMax = Math.max,
-            mathMin = Math.min;
+            mathMin = Math.min,
+            arrayProto = Array.prototype,
+            arrayIndexOf = arrayProto.indexOf,
+            arrayForEach = arrayProto.forEach,
+            arrayMap = arrayProto.map,
+            arrayReduce = arrayProto.reduce,
+            arrayReduceRight = arrayProto.reduceRight,
+            arrayFilter = arrayProto.filter,
+            arrayEvery = arrayProto.every,
+            arraySome = arrayProto.some;
 
 
         function cross(num, cros) {
@@ -41,7 +50,7 @@
 
         function intersection(a, b) {
             var ret = [], aOne;
-            if (isArray(a) && isArray(b) && a.length && b.length) {
+            if (a && b && a.length && b.length) {
                 for (var i = 0, l = a.length; i < l; i++) {
                     aOne = a[i];
                     if (indexOf(b, aOne) !== -1) {
@@ -101,7 +110,10 @@
 
         })();
 
-        function indexOf(arr, searchElement) {
+        function indexOf(arr, searchElement, from) {
+            if (arr && arrayIndexOf && arrayIndexOf === arr.indexOf) {
+                return arr.indexOf(searchElement, from);
+            }
             if (!isArray(arr)) {
                 throw new TypeError();
             }
@@ -131,7 +143,7 @@
             return -1;
         }
 
-        function lastIndexOf(arr, searchElement) {
+        function lastIndexOf(arr, searchElement, from) {
             if (!isArray(arr)) {
                 throw new TypeError();
             }
@@ -163,6 +175,9 @@
         }
 
         function filter(arr, iterator, scope) {
+            if (arr && arrayFilter && arrayFilter === arr.filter) {
+                return arr.filter(iterator, scope);
+            }
             if (!isArray(arr) || typeof iterator !== "function") {
                 throw new TypeError();
             }
@@ -185,13 +200,21 @@
             if (!isArray(arr) || typeof iterator !== "function") {
                 throw new TypeError();
             }
+            if (arr && arrayForEach && arrayForEach === arr.forEach) {
+                arr.forEach(iterator, scope);
+                return arr;
+            }
             for (var i = 0, len = arr.length; i < len; ++i) {
                 iterator.call(scope || arr, arr[i], i, arr);
             }
+
             return arr;
         }
 
         function every(arr, iterator, scope) {
+            if (arr && arrayEvery && arrayEvery === arr.every) {
+                return arr.every(iterator, scope);
+            }
             if (!isArray(arr) || typeof iterator !== "function") {
                 throw new TypeError();
             }
@@ -206,6 +229,9 @@
         }
 
         function some(arr, iterator, scope) {
+            if (arr && arraySome && arraySome === arr.some) {
+                return arr.some(iterator, scope);
+            }
             if (!isArray(arr) || typeof iterator !== "function") {
                 throw new TypeError();
             }
@@ -220,6 +246,9 @@
         }
 
         function map(arr, iterator, scope) {
+            if (arr && arrayMap && arrayMap === arr.map) {
+                return arr.map(iterator, scope);
+            }
             if (!isArray(arr) || typeof iterator !== "function") {
                 throw new TypeError();
             }
@@ -236,6 +265,10 @@
         }
 
         function reduce(arr, accumulator, curr) {
+            var initial = arguments.length > 2;
+            if (arr && arrayReduce && arrayReduce === arr.reduce) {
+                return initial ? arr.reduce(accumulator, curr) : arr.reduce(accumulator);
+            }
             if (!isArray(arr) || typeof accumulator !== "function") {
                 throw new TypeError();
             }
@@ -259,6 +292,10 @@
         }
 
         function reduceRight(arr, accumulator, curr) {
+            var initial = arguments.length > 2;
+            if (arr && arrayReduceRight && arrayReduceRight === arr.reduceRight) {
+                return initial ? arr.reduceRight(accumulator, curr) : arr.reduceRight(accumulator);
+            }
             if (!isArray(arr) || typeof accumulator !== "function") {
                 throw new TypeError();
             }
@@ -366,15 +403,14 @@
         }
 
         function removeDuplicates(arr) {
-            var ret = arr;
+            var ret = [];
             if (isArray(arr)) {
-                ret = reduce(arr, function (a, b) {
-                    if (indexOf(a, b) === -1) {
-                        return a.concat(b);
-                    } else {
-                        return a;
+                for (var i = 0, l = arr.length; i < l; i++) {
+                    var item = arr[i];
+                    if (indexOf(ret, item) === -1) {
+                        ret.push(item);
                     }
-                }, []);
+                }
             }
             return ret;
         }
@@ -491,27 +527,28 @@
             var ret = [];
             var arrs = argsToArray(arguments);
             if (arrs.length > 1) {
-                ret = removeDuplicates(reduce(arrs, function (a, b) {
-                    return a.concat(b);
-                }, []));
+                for (var i = 0, l = arrs.length; i < l; i++) {
+                    ret = ret.concat(arrs[i]);
+                }
+                ret = removeDuplicates(ret);
             }
             return ret;
         }
 
         function intersect() {
-            var collect = [], set;
+            var collect = [], sets;
             var args = argsToArray(arguments);
             if (args.length > 1) {
                 //assume we are intersections all the lists in the array
-                set = args;
+                sets = args;
             } else {
-                set = args[0];
+                sets = args[0];
             }
-            if (isArray(set)) {
-                var x = set.shift();
-                collect = reduce(set, function (a, b) {
-                    return intersection(a, b);
-                }, x);
+            if (isArray(sets)) {
+                var collect = sets.shift();
+                for (var i = 0, l = sets.length; i < l; i++) {
+                    collect = intersection(collect, sets[i]);
+                }
             }
             return removeDuplicates(collect);
         }
