@@ -1084,6 +1084,3 @@ it.describe("arrayExtender",function (it) {
             .sum().value(), 25);
     });
 }).as(module);
-
-
-it.run();
