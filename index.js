@@ -1,5 +1,6 @@
 (function () {
     "use strict";
+    /*global define*/
 
     var arraySlice = Array.prototype.slice;
 
@@ -545,7 +546,7 @@
                 sets = args[0];
             }
             if (isArray(sets)) {
-                var collect = sets.shift();
+                collect = sets.shift();
                 for (var i = 0, l = sets.length; i < l; i++) {
                     collect = intersection(collect, sets[i]);
                 }
@@ -678,8 +679,8 @@
             module.exports = defineArray(require("extended"), require("is-extended"));
         }
     } else if ("function" === typeof define) {
-        define(["require"], function (require) {
-            return defineArray(require("extended"), require("is-extended"));
+        define(["extended", "is-extended"], function (extended, is) {
+            return defineArray(extended, is);
         });
     } else {
         this.arrayExtended = defineArray(this.extended, this.isExtended);
