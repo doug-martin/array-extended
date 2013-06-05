@@ -678,7 +678,7 @@
         if ("undefined" !== typeof module && module.exports) {
             module.exports = defineArray(require("extended"), require("is-extended"));
         }
-    } else if ("function" === typeof define) {
+    } else if ("function" === typeof define && define.amd) {
         define(["extended", "is-extended"], function (extended, is) {
             return defineArray(extended, is);
         });

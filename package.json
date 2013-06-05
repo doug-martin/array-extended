@@ -1,6 +1,6 @@
 {
     "name": "array-extended",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Additional array extensions with a chainable api",
     "main": "index.js",
     "scripts": {
@@ -18,7 +18,7 @@
     "testling": {
         "files": "test/browserling.js",
         "browsers": [
-            "ie/6..latest",
+            "ie/8..latest",
             "chrome/20..latest",
             "firefox/14..latest",
             "safari/latest",
