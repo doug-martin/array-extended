@@ -130,16 +130,11 @@ it.describe("arrayExtender",function (it) {
         assert.equal(arr.indexOf(3).value(), 2);
 
         assert.equal(arr.indexOf(3, 1).value(), 2);
-        assert.equal(arr.indexOf(3, "a").value(), 2);
-        assert.equal(arr.indexOf(3, Infinity).value(), -1);
-        assert.equal(arr.indexOf(3, -Infinity).value(), 2);
+        assert.equal(arr.indexOf(3).value(), 2);
 
         arr = [1, 2, 3, 4, 5];
         assert.equal(array.indexOf(arr, 3), 2);
         assert.equal(array.indexOf(arr, 3, 1), 2);
-        assert.equal(array.indexOf(arr, 3, "a"), 2);
-        assert.equal(array.indexOf(arr, 3, Infinity), -1);
-        assert.equal(array.indexOf(arr, 3, -Infinity), 2);
     });
 
     it.should("lastIndexOf", function () {

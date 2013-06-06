@@ -112,33 +112,11 @@
         })();
 
         function indexOf(arr, searchElement, from) {
-            if (arr && arrayIndexOf && arrayIndexOf === arr.indexOf) {
-                return arr.indexOf(searchElement, from);
-            }
-            if (!isArray(arr)) {
-                throw new TypeError();
-            }
-            var t = Object(arr);
-            var len = t.length >>> 0;
-            if (len === 0) {
-                return -1;
-            }
-            var n = 0;
-            if (arguments.length > 2) {
-                n = Number(arguments[2]);
-                if (n !== n) { // shortcut for verifying if it's NaN
-                    n = 0;
-                } else if (n !== 0 && n !== Infinity && n !== -Infinity) {
-                    n = (n > 0 || -1) * floor(abs(n));
-                }
-            }
-            if (n >= len) {
-                return -1;
-            }
-            var k = n >= 0 ? n : mathMax(len - abs(n), 0);
-            for (; k < len; k++) {
-                if (k in t && t[k] === searchElement) {
-                    return k;
+            var index = (from || 0) - 1,
+                length = arr.length;
+            while (++index < length) {
+                if (arr[index] === searchElement) {
+                    return index;
                 }
             }
             return -1;
