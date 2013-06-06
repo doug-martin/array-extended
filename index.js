@@ -2,14 +2,7 @@
     "use strict";
     /*global define*/
 
-    var arraySlice = Array.prototype.slice;
-
-    function argsToArray(args, slice) {
-        slice = slice || 0;
-        return arraySlice.call(args, slice);
-    }
-
-    function defineArray(extended, is) {
+    function defineArray(extended, is, args) {
 
         var isString = is.isString,
             isArray = Array.isArray || is.isArray,
@@ -26,7 +19,8 @@
             arrayReduceRight = arrayProto.reduceRight,
             arrayFilter = arrayProto.filter,
             arrayEvery = arrayProto.every,
-            arraySome = arrayProto.some;
+            arraySome = arrayProto.some,
+            argsToArray = args.argsToArray;
 
 
         function cross(num, cros) {
@@ -654,14 +648,14 @@
 
     if ("undefined" !== typeof exports) {
         if ("undefined" !== typeof module && module.exports) {
-            module.exports = defineArray(require("extended"), require("is-extended"));
+            module.exports = defineArray(require("extended"), require("is-extended"), require("arguments-extended"));
         }
     } else if ("function" === typeof define && define.amd) {
-        define(["extended", "is-extended"], function (extended, is) {
-            return defineArray(extended, is);
+        define(["extended", "is-extended", "arguments-extended"], function (extended, is, args) {
+            return defineArray(extended, is, args);
         });
     } else {
-        this.arrayExtended = defineArray(this.extended, this.isExtended);
+        this.arrayExtended = defineArray(this.extended, this.isExtended, this.argumentsExtended);
     }
 
 }).call(this);
