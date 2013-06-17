@@ -1,6 +1,6 @@
 {
     "name": "array-extended",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "Additional array extensions with a chainable api",
     "main": "index.js",
     "scripts": {

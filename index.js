@@ -44,13 +44,12 @@
 
 
         function intersection(a, b) {
-            var ret = [], aOne;
-            if (a && b && a.length && b.length) {
-                for (var i = 0, l = a.length; i < l; i++) {
-                    aOne = a[i];
-                    if (indexOf(b, aOne) !== -1) {
-                        ret.push(aOne);
-                    }
+            var ret = [], aOne, i = -1, l;
+            l = a.length;
+            while (++i < l) {
+                aOne = a[i];
+                if (indexOf(b, aOne) !== -1) {
+                    ret.push(aOne);
                 }
             }
             return ret;
@@ -376,12 +375,13 @@
         }
 
         function removeDuplicates(arr) {
-            var ret = [];
-            if (isArray(arr)) {
-                for (var i = 0, l = arr.length; i < l; i++) {
+            var ret = [], i = -1, l, retLength = 0;
+            if (arr) {
+                l = arr.length;
+                while (++i < l) {
                     var item = arr[i];
                     if (indexOf(ret, item) === -1) {
-                        ret.push(item);
+                        ret[retLength++] = item;
                     }
                 }
             }
@@ -509,17 +509,18 @@
         }
 
         function intersect() {
-            var collect = [], sets;
-            var args = argsToArray(arguments);
-            if (args.length > 1) {
+            var collect = [], sets, i = -1 , l;
+            if (arguments.length > 1) {
                 //assume we are intersections all the lists in the array
-                sets = args;
+                sets = argsToArray(arguments);
             } else {
-                sets = args[0];
+                sets = arguments[0];
             }
             if (isArray(sets)) {
-                collect = sets.shift();
-                for (var i = 0, l = sets.length; i < l; i++) {
+                collect = sets[0];
+                i = 0;
+                l = sets.length;
+                while (++i < l) {
                     collect = intersection(collect, sets[i]);
                 }
             }
