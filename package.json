@@ -1,6 +1,6 @@
 {
     "name": "array-extended",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "Additional array extensions with a chainable api",
     "main": "index.js",
     "scripts": {
@@ -30,14 +30,14 @@
     "license": "MIT",
     "dependencies": {
         "extended": "~0.0.3",
-        "is-extended": "~0.0.3"
+        "is-extended": "~0.0.3",
+        "arguments-extended": "~0.0.3"
     },
     "devDependencies": {
         "it": "~0.2.0",
         "grunt-contrib-uglify": "~0.2.0",
         "grunt": "~0.4.1",
         "grunt-contrib-jshint": "~0.4.3",
-        "arguments-extended": "~0.0.3",
         "grunt-it": "~0.3.0"
     }
 }
